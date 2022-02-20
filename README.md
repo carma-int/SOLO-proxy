@@ -1,4 +1,4 @@
-proxy
+SOLO proxy
 =====
 ### An HTTP proxy written with Node.js (think Squid)
 [![Build Status](https://github.com/TooTallNate/proxy/workflows/Node%20CI/badge.svg)](https://github.com/TooTallNate/proxy/actions?workflow=Node+CI)
@@ -9,6 +9,10 @@ below.
 
 There is also a companion `proxy(1)` CLI tool, which spawns an HTTP(s) proxy
 server with the specified options.
+
+
+CARMA > modified to remove the xforwarded for hopbyhop and via headers if not already there..
+
 
 You could think of `proxy(1)` as similar to some of the other popular open
 source HTTP proxy software:

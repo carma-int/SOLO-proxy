@@ -140,32 +140,32 @@ function onrequest(req, res) {
 			debug.request('Request Header: "%s: %s"', key, value);
 			var keyLower = key.toLowerCase();
 
-			if (!hasXForwardedFor && 'x-forwarded-for' === keyLower) {
-				// append to existing "X-Forwarded-For" header
-				// http://en.wikipedia.org/wiki/X-Forwarded-For
-				hasXForwardedFor = true;
-				value += ', ' + socket.remoteAddress;
-				debug.proxyRequest(
-					'appending to existing "%s" header: "%s"',
-					key,
-					value
-				);
-			}
+			// if (!hasXForwardedFor && 'x-forwarded-for' === keyLower) {
+			// 	// append to existing "X-Forwarded-For" header
+			// 	// http://en.wikipedia.org/wiki/X-Forwarded-For
+			// 	hasXForwardedFor = true;
+			// 	value += ', ' + socket.remoteAddress;
+			// 	debug.proxyRequest(
+			// 		'appending to existing "%s" header: "%s"',
+			// 		key,
+			// 		value
+			// 	);
+			// }
 
-			if (!hasVia && 'via' === keyLower) {
-				// append to existing "Via" header
-				hasVia = true;
-				value += ', ' + via;
-				debug.proxyRequest(
-					'appending to existing "%s" header: "%s"',
-					key,
-					value
-				);
-			}
+			// if (!hasVia && 'via' === keyLower) {
+			// 	// append to existing "Via" header
+			// 	hasVia = true;
+			// 	value += ', ' + via;
+			// 	debug.proxyRequest(
+			// 		'appending to existing "%s" header: "%s"',
+			// 		key,
+			// 		value
+			// 	);
+			// }
 
-			if (isHopByHop.test(key)) {
-				debug.proxyRequest('ignoring hop-by-hop header "%s"', key);
-			} else {
+			// if (isHopByHop.test(key)) {
+			// 	debug.proxyRequest('ignoring hop-by-hop header "%s"', key);
+			// } else {
 				var v = headers[key];
 				if (Array.isArray(v)) {
 					v.push(value);
@@ -174,34 +174,34 @@ function onrequest(req, res) {
 				} else {
 					headers[key] = value;
 				}
-			}
+			// }
 		});
 
 		// add "X-Forwarded-For" header if it's still not here by now
 		// http://en.wikipedia.org/wiki/X-Forwarded-For
 		if (!hasXForwardedFor) {
-			headers['X-Forwarded-For'] = socket.remoteAddress;
-			debug.proxyRequest(
-				'adding new "X-Forwarded-For" header: "%s"',
-				headers['X-Forwarded-For']
-			);
+			//headers['X-Forwarded-For'] = socket.remoteAddress;
+			// debug.proxyRequest(
+			// 	'adding new "X-Forwarded-For" header: "%s"',
+			// 	headers['X-Forwarded-For']
+			// );
 		}
 
 		// add "Via" header if still not set by now
 		if (!hasVia) {
-			headers.Via = via;
-			debug.proxyRequest('adding new "Via" header: "%s"', headers.Via);
+			// headers.Via = via;
+			// debug.proxyRequest('adding new "Via" header: "%s"', headers.Via);
 		}
 
 		// custom `http.Agent` support, set `server.agent`
 		var agent = server.agent;
 		if (null != agent) {
-			debug.proxyRequest(
-				'setting custom `http.Agent` option for proxy request: %s',
-				agent
-			);
-			parsed.agent = agent;
-			agent = null;
+			// debug.proxyRequest(
+			// 	'setting custom `http.Agent` option for proxy request: %s',
+			// 	agent
+			// );
+			// parsed.agent = agent;
+			// agent = null;
 		}
 
 		if (null == parsed.port) {
