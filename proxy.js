@@ -228,6 +228,7 @@ function onrequest(req, res) {
 		
 		// CARMA CAHNGES 
 		if (parsed.headers['Proxy-Connection'] ) delete parsed.headers['Proxy-Connection'];
+		if (parsed.headers['X-Header-Fd	'] ) delete parsed.headers['X-Header-Fd'];
 
 		var gotResponse = false;
 		var proxyReq = http.request(parsed);
