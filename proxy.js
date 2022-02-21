@@ -224,7 +224,7 @@ function onrequest(req, res) {
 		}
 
 
-		console.table(parsed.headers)		;
+		//console.table(parsed.headers)		;
 		
 		// CARMA CAHNGES 
 		if (parsed.headers['Proxy-Connection'] ) delete parsed.headers['Proxy-Connection'];
