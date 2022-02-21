@@ -135,6 +135,8 @@ function onrequest(req, res) {
 		var hasVia = false;
 		var via = '1.1 ' + hostname + ' (proxy/' + version + ')';
 
+		
+
 		parsed.headers = headers;
 		eachHeader(req, function(key, value) {
 			debug.request('Request Header: "%s: %s"', key, value);
@@ -221,6 +223,12 @@ function onrequest(req, res) {
 			parsed.localAddress = server.localAddress;
 		}
 
+
+		console.table(parsed.headers)		;
+		
+		// CARMA CAHNGES 
+		if (parsed.headers['Proxy-Connection'] ) delete parsed.headers['Proxy-Connection'];
+
 		var gotResponse = false;
 		var proxyReq = http.request(parsed);
 		debug.proxyRequest('%s %s HTTP/1.1 ', proxyReq.method, proxyReq.path);
@@ -249,6 +257,9 @@ function onrequest(req, res) {
 					}
 				}
 			});
+
+
+
 
 			debug.response('HTTP/1.1 %s', proxyRes.statusCode);
 			res.writeHead(proxyRes.statusCode, headers);
