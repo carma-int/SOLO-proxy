@@ -242,12 +242,12 @@ function onrequest(req, res) {
 		//console.dir(proxyReq );
 
 		debug.proxyRequest('%s %s HTTP/1.1 ', proxyReq.method, proxyReq.path);
-		console.log('[%s] >>> proxyRequest >>>> %s HTTP/1.1 %s', new Date().toISOString(), proxyReq.method, proxyReq.path);
+		console.log('[%s] >>> proxyRequest >>>> %s - HTTP/1.1 - %s', new Date().toISOString(), proxyReq.method, proxyReq.path);
 
 
 		proxyReq.on('response', function(proxyRes) {
 			//console.log("proxyResponse >>>> ",proxyRes.statusCode , " " ,proxyRes.statusMessage, " ", req.method, " ", req.url );
-			console.log(`[${new Date().toISOString()}] >>> proxyResponse >>>> ${proxyRes.statusCode} ${proxyRes.statusMessage} ${req.method} ${req.url}` );
+			console.log(`[${new Date().toISOString()}] <<< proxyResponse <<<< ${proxyRes.statusCode} ${proxyRes.statusMessage}  - ${req.method} - ${req.url}` );
 			//console.dir (proxyRes);
 			debug.proxyResponse('HTTP/1.1 %s', proxyRes.statusCode);
 			gotResponse = true;
