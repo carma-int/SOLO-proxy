@@ -242,7 +242,7 @@ function onrequest(req, res) {
 		//console.dir(proxyReq );
 
 		debug.proxyRequest('%s %s HTTP/1.1 ', proxyReq.method, proxyReq.path);
-		console.log('[%s] >>> proxyRequest >>>> %s - HTTP/1.1 - %s', new Date().toISOString(), proxyReq.method, proxyReq.path);
+		console.log('[%s] >>> proxyRequest >>>> %s - HTTP/%s - %s', new Date().toISOString(), req.httpVersion, proxyReq.method, proxyReq.path);
 
 
 		proxyReq.on('response', function(proxyRes) {
@@ -333,6 +333,7 @@ function onrequest(req, res) {
 
 function onconnect(req, socket, head) {
 	debug.request('%s %s HTTP/%s ', req.method, req.url, req.httpVersion);
+	console.log('[%s] >>> proxyRequest >>>> %s - HTTP/%s - %s', new Date().toISOString(), req.method, req.httpVersion, req.url);
 	assert(
 		!head || 0 == head.length,
 		'"head" should be empty for proxy requests'
